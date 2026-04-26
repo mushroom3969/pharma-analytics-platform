@@ -1,6 +1,7 @@
 # 資料檔案（不納入版控）
 data/canonical/
 data/manifest.json
+data/products.json
 
 # Python
 __pycache__/

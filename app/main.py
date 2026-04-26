@@ -8,6 +8,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from core.store.parquet_store import list_uploads
+from core.store.product_store import list_products
 
 st.set_page_config(
     page_title="製藥分析平台",
@@ -27,10 +28,12 @@ with col1:
     uploads = list_uploads()
     batch_wide_count = sum(1 for u in uploads if u.shape_type == "batch_wide")
     ts_count = sum(1 for u in uploads if u.shape_type == "time_series")
+    product_count = len(list_products())
 
     st.metric("BatchWide 資料集", batch_wide_count)
     st.metric("TimeSeries 資料集", ts_count)
     st.metric("總上傳記錄", len(uploads))
+    st.metric("Products", product_count)
 
 with col2:
     st.subheader("目前 Phase")
@@ -50,6 +53,7 @@ st.divider()
 st.subheader("快速導航")
 st.page_link("pages/1_upload.py", label="📁 上傳資料", icon="📁")
 st.page_link("pages/2_data_library.py", label="🗂️ 資料庫", icon="🗂️")
+st.page_link("pages/3_products.py", label="📦 Products", icon="📦")
 
 st.divider()
 st.caption(
